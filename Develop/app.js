@@ -16,25 +16,25 @@ const questionsManger = [{
     message: "What is your name?",
     name: "managerName"
 },
- {
+{
     type: "input",
     message: "what is your email?",
     name: "managerEmail"
 },
 
-    {
-        type: "input",
-        message: "what is your id?",
-        name: "managerId"
-    },
-    
+{
+    type: "input",
+    message: "what is your id?",
+    name: "managerId"
+},
+
 ]
-const questionsIntern =[{
+const questionsIntern = [{
     type: "input",
     message: "What is your name?",
     name: "internName"
 },
- {
+{
     type: "input",
     message: "what is your email?",
     name: "internEmail"
@@ -51,12 +51,12 @@ const questionsIntern =[{
     name: "school"
 }
 ]
-const questionsEngineer =[{
+const questionsEngineer = [{
     type: "input",
     message: "What is your name?",
     name: "engineerName"
 },
- {
+{
     type: "input",
     message: "what is your email?",
     name: "engineerEmail"
@@ -73,36 +73,42 @@ const questionsEngineer =[{
     name: "github"
 
 }];
-const metaQuestions = [
+const employeeType = [
     {
-        type: "confirm",
-        message: "Would you like to make an intern",
-        name: "employeeIntern"
-    
-    },
-    {
-        type: "confirm",
-        message: "Would you like to make an Engineer?",
-        name: "employeeEngineer"
-    
-    },
-    {
-        type: "confirm",
-        message: "Would you like to make to quit?",
-        name: "quit"
-    
+        type: "checkbox",
+        message: "Would you like to make an Intern, Engineer, or quit?",
+        choice: "Intern, Engineer, Quit"
+
     }
 ];
 
 // Input manger info
-inquirer .prompt(questionsManger)
-.then(function(response) {
-    employeeArray.push(response);
-   console.log(employeeArray);
-
+inquirer.prompt(questionsManger)
+await(function (response) {
+    return employeeArray.push(response);
 });
-
 // loop employees - do you wany engineer or intern or quit break out of the loop
+function chooseemployeeType() {
+    if (inquirer.prompt(employeeType === "Intern")) {
+    inquirer.prompt(questionsIntern)
+        await function (response) {
+            return employeeArray.push(response)
+        }
+    } else if (inquirer.prompt(employeeType === "Engineer")) {
+            await function(response){
+                return employeeArray.push(response)
+
+            }
+    }
+    else{
+        // run htmlrender
+    }
+}
+
+
+
+
+
 // .then to push array
 // render(employeeArray)
 
