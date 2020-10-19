@@ -11,7 +11,7 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 const render = require("./lib/htmlRenderer");
 let employeeArray = [];
 
-const questionsManger = [{
+const questionsManager = [{
     type: "input",
     message: "What is your name?",
     name: "managerName"
@@ -83,7 +83,7 @@ const employeeType = [
 ];
 
 // Input manger info
-inquirer.prompt(questionsManger)
+inquirer.prompt(questionsManager)
 await(function (response) {
     return employeeArray.push(response);
 });
