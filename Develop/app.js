@@ -21,11 +21,16 @@ const questionsManager = [{
     message: "what is your email?",
     name: "managerEmail"
 },
-
 {
     type: "input",
     message: "what is your id?",
     name: "managerId"
+},
+
+{
+    type: "input",
+    message: "what is your Office Number?",
+    name: "officeNumber"
 },
 
 ]
