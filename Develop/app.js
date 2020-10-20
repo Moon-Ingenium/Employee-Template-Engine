@@ -99,9 +99,6 @@ inquirer.prompt(questionsManager)
 
 // loop employees - do you wany engineer or intern or quit break out of the loop
 
-
-
-
 async function chooseemployeeType() {
     let answer = await inquirer.prompt(employeeType);
     let employee;
