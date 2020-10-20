@@ -92,7 +92,7 @@ const employeeType = [
 
 inquirer.prompt(questionsManager)
     .then(function (response) {
-        employeeArray.push(new Manager(response));
+        employeeArray.push(new Manager(response.managerName, response.managerId, response.managerEmail, response.officeNumber));
         chooseemployeeType();
 
     });
@@ -105,13 +105,12 @@ async function chooseemployeeType() {
     while (answer.employeeType[0] != "Quit") {
         console.log(answer.employeeType);
         if (answer.employeeType[0] === "Intern") {
-            employee = await inquirer.prompt(questionsIntern)
-              employeeArray.push(new Intern(employee))
-
+            employee = await inquirer.prompt(questionsIntern);
+              employeeArray.push(new Intern(employee.internName, employee.internId, employee.internEmail,employee.school))
                
         } else if (answer.employeeType[0] === "Engineer") {
             employee = await inquirer.prompt(questionsEngineer)
-           employeeArray.push(new Engineer(employee))
+           employeeArray.push(new Engineer(employee.engineerName, employee.engineerId, employee.engineerEmail,employee.gitHub))
 
         }
         answer = await inquirer.prompt(employeeType);
