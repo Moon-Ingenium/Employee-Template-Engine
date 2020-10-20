@@ -87,27 +87,31 @@ const employeeType = [
     }
 ];
 
-// Input manger info
+// Input manager info
 inquirer.prompt(questionsManager)
 await(function (response) {
     return employeeArray.push(response);
 });
 // loop employees - do you wany engineer or intern or quit break out of the loop
+
 function chooseemployeeType() {
+    while(employeeType!= "Quit"){
     if (inquirer.prompt(employeeType === "Intern")) {
     inquirer.prompt(questionsIntern)
         await function (response) {
             return employeeArray.push(response)
+            
         }
     } else if (inquirer.prompt(employeeType === "Engineer")) {
             await function(response){
                 return employeeArray.push(response)
-
+                
             }
     }
     else{
-        // run htmlrender
+        render();
     }
+}
 }
 
 
