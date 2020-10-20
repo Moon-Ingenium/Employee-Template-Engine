@@ -75,7 +75,7 @@ const questionsEngineer = [{
 },
 {
     type: "input",
-    message: "what is your github url?",
+    message: "what is your github username?",
     name: "github"
 
 }];
@@ -100,6 +100,7 @@ inquirer.prompt(questionsManager)
 // loop employees - do you wany engineer or intern or quit break out of the loop
 
 async function chooseemployeeType() {
+    // must use space bar to select checkbox choice
     let answer = await inquirer.prompt(employeeType);
     let employee;
     while (answer.employeeType[0] != "Quit") {
@@ -110,7 +111,7 @@ async function chooseemployeeType() {
                
         } else if (answer.employeeType[0] === "Engineer") {
             employee = await inquirer.prompt(questionsEngineer)
-           employeeArray.push(new Engineer(employee.engineerName, employee.engineerId, employee.engineerEmail,employee.gitHub))
+           employeeArray.push(new Engineer(employee.engineerName, employee.engineerId, employee.engineerEmail,employee.github))
 
         }
         answer = await inquirer.prompt(employeeType);
@@ -118,7 +119,7 @@ async function chooseemployeeType() {
     }
    if(answer.employeeType[0] === "Quit"){
  
-    writeFileAsync("team.html", render(employeeArray));
+    writeFileAsync(outputPath , render(employeeArray));
    }
 }
 const writeFileAsync = util.promisify(fs.writeFile);
