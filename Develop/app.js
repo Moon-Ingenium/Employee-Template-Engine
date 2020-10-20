@@ -4,6 +4,7 @@ const Intern = require("./lib/Intern");
 const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
+const util = require("util");
 
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
@@ -82,44 +83,51 @@ const employeeType = [
     {
         type: "checkbox",
         message: "Would you like to make an Intern, Engineer, or quit?",
-        choice: "Intern, Engineer, Quit"
-
+        choices: ["Intern", "Engineer", "Quit"],
+        name: "employeeType"
     }
 ];
 
 // Input manager info
+
 inquirer.prompt(questionsManager)
-await(function (response) {
-    return employeeArray.push(response);
-});
+    .then(function (response) {
+        employeeArray.push(new Manager(response));
+        chooseemployeeType();
+
+    });
+
 // loop employees - do you wany engineer or intern or quit break out of the loop
 
-function chooseemployeeType() {
-    while(employeeType!= "Quit"){
-    if (inquirer.prompt(employeeType === "Intern")) {
-    inquirer.prompt(questionsIntern)
-        await function (response) {
-            return employeeArray.push(response)
-            
+
+
+
+async function chooseemployeeType() {
+    let answer = await inquirer.prompt(employeeType);
+    let employee;
+    while (answer.employeeType[0] != "Quit") {
+        console.log(answer.employeeType);
+        if (answer.employeeType[0] === "Intern") {
+            employee = await inquirer.prompt(questionsIntern)
+              employeeArray.push(new Intern(employee))
+
+               
+        } else if (answer.employeeType[0] === "Engineer") {
+            employee = await inquirer.prompt(questionsEngineer)
+           employeeArray.push(new Engineer(employee))
+
         }
-    } else if (inquirer.prompt(employeeType === "Engineer")) {
-            await function(response){
-                return employeeArray.push(response)
-                
-            }
+        answer = await inquirer.prompt(employeeType);
+
     }
-    else{
-        render();
-    }
+   if(answer.employeeType[0] === "Quit"){
+ 
+    writeFileAsync("team.html", render(employeeArray));
+   }
 }
-}
+const writeFileAsync = util.promisify(fs.writeFile);
 
 
-
-
-
-// .then to push array
-// render(employeeArray)
 
 
 
